@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DSUBPROJECT=HW5
+      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DSUBPROJECT=HW6
       - run: cmake --build .
       - run: cmake --build . --target package
       - name: Create Release
@@ -33,6 +33,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./vector_editor-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: vector_editor-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./matrix-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: matrix-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
