@@ -19,7 +19,7 @@ public:
         std::vector<std::string> const& files_list,
         size_t block_size,
         HASH_ALGORITHM hash_algo)
-    : m_files_list(files_list.begin(), files_list.end()) // TODO: maybe it should have been list from the beginning
+    : m_files_list(files_list.begin(), files_list.end())
     , m_block_size(block_size)
     , m_hash_strategy(create_hash_strategy(hash_algo))
     {

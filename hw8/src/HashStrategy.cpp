@@ -1,5 +1,6 @@
 #include "HashStrategy.h"
 
+#include <boost/crc.hpp>
 #include <boost/functional/hash.hpp>
 
 #include <memory>
@@ -12,10 +13,11 @@ std::size_t BoostDefaultHashStrategy::calc_hash(std::string const& input_string)
     return string_hash(input_string);
 }
 
-std::size_t CRC32HashStrategy::calc_hash(std::string const& )
+std::size_t CRC32HashStrategy::calc_hash(std::string const& input_string)
 {
-    // TODO: implement
-    return 0;
+    boost::crc_32_type result;
+    result.process_bytes(input_string.data(), input_string.length());
+    return result.checksum();
 }
 
 std::unique_ptr<IHashStrategy> create_hash_strategy(HASH_ALGORITHM hash_algo)

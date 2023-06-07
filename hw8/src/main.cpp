@@ -22,8 +22,6 @@ int main(int argc, char* argv[])
 
     desc.add_options()
 
-    // TODO: set default value for hash algorithm
-
     ("help,h", "Show help")
     ("include-dir,i", po::value<std::vector<std::string>>(&search_options.include_dirs)->multitoken()->required(), "Include directories")
     ("exclude-dir,e", po::value<std::vector<std::string>>(&search_options.exclude_dirs)->multitoken(), "Exclude directories that match")
@@ -31,7 +29,7 @@ int main(int argc, char* argv[])
     ("scan-level,l", po::value<int>(&search_options.scan_level)->default_value(0), "Level of scanning")
     ("file-size,s", po::value<size_t>(&search_options.min_file_size)->default_value(1), "Minimum file size")
     ("block-size,b", po::value<size_t>(&hash_options.block_size)->required(), "Block size for reading files")
-    ("hash,h", po::value<std::string>(&hash_options.hash_algo), "Hash algorithm used for comparison")
+    ("hash,a", po::value<std::string>(&hash_options.hash_algo), "Hash algorithm used for comparison. Possible values [crc32, default].")
     ;
 
     try

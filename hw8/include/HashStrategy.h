@@ -5,12 +5,6 @@
 #include <memory>
 #include <string>
 
-// wrapper object around hash algorithms
-// in constructor decide which algorithm will be used
-// public method hash
-
-// TODO: do smth like a hashing strategy
-
 class IHashStrategy
 {
 public:

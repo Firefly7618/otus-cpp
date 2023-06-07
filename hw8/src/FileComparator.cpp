@@ -127,9 +127,6 @@ std::size_t FileComparator::get_hash(std::string const& file_path, size_t block_
             std::string block (m_block_size, '\0');
             is.read(&block[0], m_block_size);
 
-            // TODO: remove this printing
-            //std::cout << file_path << " " << block_num << " " << block << std::endl;
-
             auto const result = m_hash_strategy->calc_hash(block);
 
             file_hashes.push_back(result);
