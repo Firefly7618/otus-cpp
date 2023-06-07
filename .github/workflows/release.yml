@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DSUBPROJECT=HW7
+      - run: cmake . -DPATCH_VERSION=${{ github.run_number }} -DSUBPROJECT=HW8
       - run: cmake --build .
       - run: cmake --build . --target package
       - name: Create Release
@@ -33,6 +33,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./bulk-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: bulk-0.0.${{ github.run_number }}-Linux.deb
+          asset_path: ./bayan-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: bayan-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
