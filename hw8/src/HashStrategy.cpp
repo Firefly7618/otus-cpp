@@ -1,15 +1,18 @@
 #include "HashStrategy.h"
 
+#include <boost/functional/hash.hpp>
+
 #include <memory>
 #include <stdexcept>
 
-uint32_t BoostDefaultHashStrategy::calc_hash(std::string const& )
+std::size_t BoostDefaultHashStrategy::calc_hash(std::string const& input_string)
 {
-    // TODO: implement
-    return 0;
+    // Standard hash
+    boost::hash<std::string> string_hash;
+    return string_hash(input_string);
 }
 
-uint32_t CRC32HashStrategy::calc_hash(std::string const& )
+std::size_t CRC32HashStrategy::calc_hash(std::string const& )
 {
     // TODO: implement
     return 0;

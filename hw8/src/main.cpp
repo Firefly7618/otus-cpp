@@ -1,6 +1,7 @@
 #include "SearchOptions.h"
 #include "HashOptions.h"
 #include "HashStrategy.h"
+#include "FileComparator.h"
 
 #include <boost/program_options.hpp>
 
@@ -10,46 +11,6 @@
 #include <iostream>
 
 namespace po = boost::program_options;
-namespace fs = boost::filesystem;
-
-void find_equal_files(
-    std::vector<std::string> const& files_list,
-    HASH_ALGORITHM hash_algo,
-    size_t )
-{
-    // map: filepath -> vector of hashes
-    //std::map<std::string, std::vector<???> 
-
-    /*
-    // Standard hash
-    boost::hash<std::string> string_hash;
-    std::size_t h = string_hash("Hash me");
-    */
-
-   auto hash_strategy = create_hash_strategy(hash_algo);
-
-   /*
-   // CRC 32
-
-   */
-
-    for (auto it1 = files_list.begin(); it1 != files_list.end(); it1++)
-    {
-        for (auto it2 = std::next(it1); it2 != files_list.end(); it2++)
-        {
-            fs::path path1(*it1);
-            fs::path path2(*it2);
-
-            // compare sizes
-            if (fs::file_size(path1) != fs::file_size(path2))
-            {
-                continue;
-            }
-
-
-        }
-    }
-}
 
 int main(int argc, char* argv[])
 {
@@ -79,9 +40,6 @@ int main(int argc, char* argv[])
         po::store(parsed, vm);
         po::notify(vm);
 
-        // TODO: maybe this is better than so many parameters...
-        //std::cout << vm["scan-level"].as<size_t>() << std::endl;
-
         hash_options.verify_options();
         search_options.verify_options();
 
@@ -89,8 +47,8 @@ int main(int argc, char* argv[])
 
         auto filepaths = search_options.get_files_list();
 
-        // TODO: do the comparison. Filepaths are ready
-        find_equal_files(filepaths, hash_algo, hash_options.block_size);
+        FileComparator comparator(filepaths, hash_options.block_size, hash_algo);
+        comparator.find_equal_files();
     }
     catch(std::exception& ex)
     {

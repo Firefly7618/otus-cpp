@@ -58,9 +58,6 @@ std::vector<std::string> SearchOptions::get_files_list()
             {
                 if (check_file_params(dir_it->path()))
                 {
-                    // TODO: remove this output
-                    std::cout << fs::canonical(dir_it->path()) << std::endl;
-                    // TODO: think about saving paths instead of strings as an optimization
                     filepaths.push_back(dir_it->path().string());
                 }
             }
@@ -78,7 +75,6 @@ bool SearchOptions::check_file_params(const fs::path& path_to_check)
 
         if (not boost::regex_match(path_to_check.filename().string(), re))
         {
-            std::cout << "Didn't match " << path_to_check.filename().string() << std::endl;
             return false;
         }
     }

@@ -15,7 +15,7 @@ class IHashStrategy
 {
 public:
 
-    virtual uint32_t calc_hash(std::string const& input_string) = 0;
+    virtual std::size_t calc_hash(std::string const& input_string) = 0;
 
 };
 
@@ -23,7 +23,7 @@ class BoostDefaultHashStrategy : public IHashStrategy
 {
 public:
 
-    uint32_t calc_hash(std::string const& input_string) override;
+    std::size_t calc_hash(std::string const& input_string) override;
 
 };
 
@@ -31,7 +31,7 @@ class CRC32HashStrategy : public IHashStrategy
 {
 public:
 
-    uint32_t calc_hash(std::string const& input_string) override;
+    std::size_t calc_hash(std::string const& input_string) override;
 
 };
 
